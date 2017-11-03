@@ -36,9 +36,9 @@ def requests_django_endpoint_info(context):
     context.response = requests.get(Config.RAS_DJANGO_SERVICE + Config.RAS_INFO)
 
 
-@given('the system requests api gateway endpoint info')
-def requests_api_gateway_endpoint_info(context):
-    context.response = requests.get(Config.RAS_API_GATEWAY_SERVICE + Config.RAS_INFO)
+@given('the system requests frontstage-api endpoint info')
+def requests_frontstage_api_endpoint_info(context):
+    context.response = requests.get(Config.RAS_FRONTSTAGE_API_SERVICE + Config.RAS_INFO)
 
 
 @when('the secure message endpoint info is returned')
@@ -83,8 +83,8 @@ def django_endpoint_info_is_returned(context):
     nose.tools.assert_equal(response['version'], '1.0.0')
 
 
-@when('the api gateway endpoint info is returned')
-def api_gateway_endpoint_info_is_returned(context):
+@when('the frontstage-api endpoint info is returned')
+def frontstage_api_endpoint_info_is_returned(context):
     response = json.loads(context.response.text)
-    nose.tools.assert_equal(response['name'], 'apigatewaysvc')
-    nose.tools.assert_equal(response['version'], '0.1.0')
+    nose.tools.assert_equal(response['name'], 'ras-frontstage-api')
+    nose.tools.assert_equal(response['version'], '0.0.1')
