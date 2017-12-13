@@ -9,9 +9,5 @@ logger = wrap_logger(logging.getLogger(__name__))
 
 if __name__ == '__main__':
 
-    behave_executable.main()
-
-    def before_scenario(context, scenario):
-        if "ignore" in scenario.effective_tags:
-            scenario.skip("Unimplemented Functionality")
-            return
+    behave_executable.main('system_tests/features')
+    behave_executable.main('acceptance_tests/features')
