@@ -3,7 +3,7 @@ Feature: Get info endpoints
   Scenario Outline: System hits service get info endpoint
     Given services are running
     When  the system requests <service> endpoint info
-    Then   a success status code (200) is returned
+    Then  a success status code (200) is returned
 
    Examples: Services
     |service |

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c5f8cb3e3d3c0040db99ed8356cfe926e3c71c5c93851169c199ea6007144734"
+            "sha256": "a4d8d8675dc26a297c83123cad1ebf4b591f09367b161ae9836fcda0c7d45173"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -9,9 +9,9 @@
             "os_name": "posix",
             "platform_machine": "x86_64",
             "platform_python_implementation": "CPython",
-            "platform_release": "16.5.0",
+            "platform_release": "17.3.0",
             "platform_system": "Darwin",
-            "platform_version": "Darwin Kernel Version 16.5.0: Fri Mar  3 16:52:33 PST 2017; root:xnu-3789.51.2~3/RELEASE_X86_64",
+            "platform_version": "Darwin Kernel Version 17.3.0: Thu Nov  9 18:09:22 PST 2017; root:xnu-4570.31.3~1/RELEASE_X86_64",
             "python_full_version": "3.6.3",
             "python_version": "3.6",
             "sys_platform": "darwin"
@@ -53,6 +53,12 @@
             ],
             "version": "==3.0.4"
         },
+        "chromedriver-installer": {
+            "hashes": [
+                "sha256:c2d5a7c875de58c4da1c98db7af42b9f499f3ffc266e2d28491403cbe7495aba"
+            ],
+            "version": "==0.0.6"
+        },
         "idna": {
             "hashes": [
                 "sha256:8c7309c718f94b3a625cb648ace320157ad16ff131ae0af362c9f21b80ef6ec4",
@@ -88,12 +94,26 @@
             ],
             "version": "==2.18.4"
         },
+        "selenium": {
+            "hashes": [
+                "sha256:af448c15b3225056cd406b435cda10bfcee250460a4811e4fd8b21be9f61626c",
+                "sha256:3af07d7a4b5d523540fa4f32902b9dec15e0379862406aef974729f42411053d"
+            ],
+            "version": "==3.8.0"
+        },
         "six": {
             "hashes": [
                 "sha256:832dc0e10feb1aa2c68dcc57dbb658f1c7e65b9b61af69048abc87a2db00a0eb",
                 "sha256:70e8a77beed4562e7f14fe23a786b54f6296e34344c23bc42f07b15018ff98e9"
             ],
             "version": "==1.11.0"
+        },
+        "splinter": {
+            "hashes": [
+                "sha256:71a83ef32cd976f3fb80a190d3c439a6dd82c347bcd0feb068d7d48e14aee269",
+                "sha256:f97119f84d339067169451d56043f37f6b0a504a17a7ac6e48c91c012be72af6"
+            ],
+            "version": "==0.7.7"
         },
         "structlog": {
             "hashes": [
