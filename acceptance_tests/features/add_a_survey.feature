@@ -7,7 +7,6 @@ Feature: Add a survey
     Given the user is signed into their account
 
   Scenario: Enter the enrolment code
-    And the user is signed into their account
     When they add a new survey
     Then they are able to enter the enrolment code
 
