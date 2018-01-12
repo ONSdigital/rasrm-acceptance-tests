@@ -34,6 +34,7 @@ def enter_invalid_enrolment_code(context):
 
 @then('they are to be notified')
 def invalid_enrolment_code_notification(context):
+    context.find_by_id('')
 
 
 @when('they continue and confirm that the organisation and survey that they are enrolling for is correct')
@@ -42,7 +43,8 @@ def confirm_organisation_and_continue(context):
 
 
 @then('the new survey is to be listed in My Surveys')
-
+def new_survey_listed(context):
+    context.find_by_id('')
 
 
 @then('confirmation is presented to the user')
@@ -57,4 +59,4 @@ def click_cancel(context):
 
 @then('the user is navigated back to their "To do" list and have not enrolled for that survey')
 def view_todo_list(context):
-
+    context.find_by_id('')
