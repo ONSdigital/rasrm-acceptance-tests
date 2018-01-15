@@ -17,8 +17,8 @@ def enter_enrolment_code(context):
 @given('the user has entered their enrolment code')
 @when('they enter a valid enrolment code')
 def enter_valid_enrolment_code(context):
-    context.browser.find_by_id('ENROLMENT_CODE_FIELD').send_keys('')
-    context.browser.find_by_id('').click()
+    context.browser.find_by_id('ENROLMENT_CODE_FIELD').send_keys()
+    context.browser.find_by_id('CONTINUE_BTN').click()
 
 
 @then('they are to be presented with the survey and organisation that they are enrolling for')
