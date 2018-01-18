@@ -7,6 +7,7 @@ def after_all(context):
     Close the browser after testing. See https://pythonhosted.org/behave/tutorial.html#environmental-controls
     """
     browser.quit()
-    
+
+
 def before_all(context):
-        database_controller.reset_database('/ras-integration-tests/resources/sample_files/us334-add_a_survey/sample_file_existing_survey.csv')
+        database_controller.reset_database('/ras-integration-tests/resources/database/databasereset.sql')
