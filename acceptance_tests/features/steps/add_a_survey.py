@@ -54,7 +54,7 @@ def confirmation_presented_for_new_survey(context):
 
 @when('they navigate to the confirm organisation page and click cancel')
 def click_cancel(context):
-    context.browser.find_by_id().click()
+    context.browser.find_by_id().click('CANCEL_BTN')
 
 
 @then('the user is navigated back to their "To do" list and have not enrolled for that survey')
