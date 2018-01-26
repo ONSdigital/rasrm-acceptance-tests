@@ -20,7 +20,7 @@ Feature: Add a survey
   Scenario: View survey & organisation that they are enrolling for
     And selects to add a new survey
     When they enter a valid enrolment code
-    Then they are to be presented with the survey and organisation they are enrolling for
+    Then they are to be presented with the survey and organisation that they are enrolling for
 
   @us334-addSurvey_s04
   Scenario: Invalid entry of an enrolment code
