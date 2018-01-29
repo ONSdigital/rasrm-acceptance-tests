@@ -60,4 +60,6 @@ def click_cancel(context):
 
 @then('the user is navigated back to their "To do" list and have not enrolled for that survey')
 def view_todo_list(context):
-    context.find_by_id('')
+    context.find_by_id('SURVEY_TODO_TAB').first.has_class('btn btn--secondary btn--border navigation-tabs__tab navigation-tabs__tab--active')
+    current_url = context.current_url
+    print(current_url)
