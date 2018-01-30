@@ -75,6 +75,14 @@ def load_collection_instrument(test_file):
     browser.find_by_id('btn-load-ci').click()
 
 
+def select_wrong_file_type(test_file):
+    browser.driver.find_element_by_id('ciFile').send_keys(abspath(test_file))
+
+
+def get_collection_instrument_error_text():
+    return browser.driver.find_element_by_id('ciFileErrorText').text
+
+
 def get_collection_instrument_success_text():
     return browser.find_by_id('collection-instrument-success').text
 
@@ -82,3 +90,7 @@ def get_collection_instrument_success_text():
 def get_collection_instruments():
     tds = browser.find_by_id('collection-instruments-table').find_by_tag('tbody').find_by_tag('td')
     return list(map(lambda td: td.value, tds))
+
+
+def get_error_header():
+    return browser.find_by_id('error-header').text
