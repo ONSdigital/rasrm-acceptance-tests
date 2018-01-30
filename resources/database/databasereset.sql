@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+/* Clean And Reset Collection Exercise DB */
+
+>>>>>>> master
 /* Clean Sample DB */
 
 TRUNCATE sample.samplesummary CASCADE;
@@ -25,6 +30,10 @@ ALTER SEQUENCE collectionexercise.sampleunitgrouppkseq RESTART WITH 1;
 ALTER SEQUENCE collectionexercise.sampleunitpkseq RESTART WITH 1;
 
 UPDATE collectionexercise.collectionexercise SET statefk = 'INIT';
+<<<<<<< HEAD
+=======
+DELETE FROM collectionexercise.samplelink;
+>>>>>>> master
 
 
 /* Clean Case DB */
@@ -75,7 +84,11 @@ TRUNCATE partysvc.business_attributes CASCADE;
 TRUNCATE partysvc.business_respondent CASCADE;
 TRUNCATE partysvc.enrolment CASCADE;
 TRUNCATE partysvc.pending_enrolment CASCADE;
+<<<<<<< HEAD
 TRUNCATE partysvc.respondent CASCADE; 
+=======
+TRUNCATE partysvc.respondent CASCADE;
+>>>>>>> master
 
 ALTER SEQUENCE partysvc.business_attributes_id_seq RESTART WITH 1;
 ALTER SEQUENCE partysvc.pending_enrolment_id_seq RESTART WITH 1;
@@ -93,5 +106,8 @@ SET SCHEMA 'action';
 
 INSERT INTO action.actionrule (actionrulepk, actionplanfk, actiontypefk, name, description, daysoffset, priority)
 VALUES (1, 1, 1, 'BSNOT+0', 'Enrolment Invitation Letter(+0 days)', 0, 3);
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> master
