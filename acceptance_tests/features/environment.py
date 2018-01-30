@@ -10,4 +10,4 @@ def after_all(context):
 
 
 def before_all(context):
-        database_controller.reset_database('resources/database/databasereset.sql')
+        database_controller.reset_rm_database('/ras-integration-tests/resources/database/database_reset_rm.sql')

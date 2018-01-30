@@ -9,8 +9,9 @@ from config import Config
 logger = wrap_logger(logging.getLogger(__name__))
 
 
-def reset_database(sql_script_file_path):
-    logger.debug('Executing SQL script', file_path=sql_script_file_path)
+def reset_rm_database(sql_script_file_path):
+    logger.debug('Executing SQL script', sql_script=sql_script_file_path)
+
     url = Config.CF_DATABASE_TOOL + '/sql'
     headers = {
         'Content-Type': 'text/plain'
