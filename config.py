@@ -87,3 +87,6 @@ class Config(object):
     SECURITY_USER_NAME = os.getenv('SECURITY_USER_NAME', 'admin')
     SECURITY_USER_PASSWORD = os.getenv('SECURITY_USER_PASSWORD', 'secret')
     BASIC_AUTH = (SECURITY_USER_NAME, SECURITY_USER_PASSWORD)
+
+    PARTY_DATABASE_URI = os.getenv('PARTY_DATABASE_URI', "postgres://postgres:postgres@localhost:6432/postgres")
+    DJANGO_OAUTH_DATABASE_URI = os.getenv('DJANGO_OAUTH_DATABASE_URI', "postgres://postgres:postgres@localhost:6432/postgres")
