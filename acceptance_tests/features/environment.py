@@ -1,6 +1,7 @@
 from acceptance_tests import browser
 
 from controllers import collection_exercise_controller, database_controller, sample_controller, party_controller, django_oauth_controller, case_controller
+from config import Config
 
 
 def after_all(context):
@@ -21,10 +22,10 @@ def enrolment_setup():
     sample_controller.load_sample(test_file=test_file)
     collection_exercise_controller.execute_collection_exercise()
     valid_enrolment_code = database_controller.select_iac()
-    respondent_info = party_controller.register_respondent(email_address='example@example.com',
+    respondent_info = party_controller.register_respondent(email_address=Config.USERNAME,
                                                            first_name='first_name',
                                                            last_name='last_name',
-                                                           password='password',
+                                                           password=Config.PASSWORD,
                                                            phone_number='0987654321',
                                                            enrolment_code=valid_enrolment_code
                                                            )

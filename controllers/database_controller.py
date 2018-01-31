@@ -65,8 +65,8 @@ def enrol_party(respondant_uuid):
     case_id = None
 
     sql_statement_update_enrolment = f"UPDATE partysvc.enrolment SET status = 'ENABLED' WHERE respondent_id = (SELECT id FROM partysvc.respondent WHERE party_uuid = '{respondant_uuid}');"
-    sql_get_case_id = f"SELECT case_id FROM partysvc.pending_enrolment WHERE respondent_id = '{respondant_uuid}'"
-    sql_delete_pending_enrolment = f"DELETE FROM partysvc.pending_enrolment WHERE respondent_id = '{respondant_uuid}'"
+    sql_get_case_id = f"SELECT case_id FROM partysvc.pending_enrolment WHERE respondent_id = (SELECT id FROM partysvc.respondent WHERE party_uuid = '{respondant_uuid}');"
+    sql_delete_pending_enrolment = f"DELETE FROM partysvc.pending_enrolment WHERE respondent_id = (SELECT id FROM partysvc.respondent WHERE party_uuid = '{respondant_uuid}');"
 
     engine = create_engine(Config.PARTY_DATABASE_URI)
     connection = engine.connect()

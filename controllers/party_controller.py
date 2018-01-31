@@ -25,7 +25,7 @@ def register_respondent(email_address, first_name, last_name, password, phone_nu
 
     response = requests.post(url, json=registration_data, auth=Config.BASIC_AUTH)
 
-    if response.status_code != 201:
+    if response.status_code != 200:
         logger.error('Failed to register_respondent in tests')
 
     return json.loads(response.text)

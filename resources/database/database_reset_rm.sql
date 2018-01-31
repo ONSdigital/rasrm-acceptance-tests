@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-/* Clean And Reset Collection Exercise DB */
-
->>>>>>> master
 /* Clean Sample DB */
 
 TRUNCATE sample.samplesummary CASCADE;
