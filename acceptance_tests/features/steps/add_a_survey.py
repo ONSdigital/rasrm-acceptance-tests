@@ -17,7 +17,7 @@ def add_a_new_survey(context):
     browser.find_by_id('ADD_SURVEY_BTN').click()
 
 
-@then('they are able to enter the enrolment code')
+@then('they are able to enter an enrolment code')
 def enter_enrolment_code(context):
     browser.find_by_id('ENROLMENT_CODE_FIELD')
 
@@ -27,7 +27,7 @@ def enter_enrolment_code(context):
 def enter_valid_enrolment_code(context):
     add_survey.go_to()
     enrolment_code = select_iac()
-    browser.find_by_id('ENROLMENT_CODE_FIELD').send_keys(enrolment_code)
+    browser.driver.find_element_by_id('ENROLEMENT_CODE_FIELD').send_keys(enrolment_code)
     browser.find_by_id('CONTINUE_BTN').click()
 
 
@@ -38,7 +38,7 @@ def view_confirmation_page(context):
 
 @when('they enter an invalid enrolment code')
 def enter_invalid_enrolment_code(context):
-    browser.find_by_id('ENROLMENT_CODE_FIELD').send_keys('222thu78nj7m')
+    browser.driver.find_element_by_id('ENROLEMENT_CODE_FIELD').send_keys('222thu78nj7m')
     browser.find_by_id('CONTINUE_BTN').click()
 
 
@@ -49,16 +49,10 @@ def invalid_enrolment_code_notification(context):
 
 @when('they continue and confirm that the organisation and survey that they are enrolling for is correct')
 def confirm_organisation_and_continue(context):
-    browser.find_by_id('CONTINUE_BTN').click()
     browser.find_by_id('CONFIRM_SURVEY_BTN').click()
 
 
-@then('the new survey is to be listed in My Surveys')
-def new_survey_listed(context):
-    browser.find_by_id('')
-
-
-@then('confirmation is presented to the user')
+@then('the new survey is to be listed in My Surveys and confirmation is presented to the user')
 def confirmation_presented_for_new_survey(context):
     browser.find_by_id('NEW_SURVEY_NOTIF')
 
@@ -68,6 +62,6 @@ def click_cancel(context):
     browser.find_by_id('CANCEL_BTN').click()
 
 
-@then('the user is navigated back to their "To do" list and have not enrolled for that survey')
+@then('the user is navigated back to their "To do" list and they have not enrolled for that survey')
 def view_todo_list(context):
     browser.find_by_id('SURVEY_TODO_TAB').first.has_class('btn btn--secondary btn--border navigation-tabs__tab navigation-tabs__tab--active')
