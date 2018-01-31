@@ -1,8 +1,15 @@
 from behave import given, when, then
+
 from acceptance_tests import browser
+from controllers.database_controller import select_iac
+from acceptance_tests.features.pages import surveys_todo, add_survey
 
 
-@given('the user has selected to add a new survey')
+@when('access to do list in my surveys')
+def surveys_to_do_list(context):
+    surveys_todo.go_to()
+
+
 @given('selects to add a new survey')
 @when('they add a new survey')
 @then('they are able to add a new survey')
@@ -16,10 +23,11 @@ def enter_enrolment_code(context):
 
 
 @given('the user has entered a valid enrolment code')
-@given('the user has entered their enrolment code')
 @when('they enter a valid enrolment code')
 def enter_valid_enrolment_code(context):
-    browser.find_by_id('ENROLMENT_CODE_FIELD').send_keys()
+    add_survey.go_to()
+    enrolment_code = select_iac()
+    browser.find_by_id('ENROLMENT_CODE_FIELD').send_keys(enrolment_code)
     browser.find_by_id('CONTINUE_BTN').click()
 
 
@@ -42,6 +50,7 @@ def invalid_enrolment_code_notification(context):
 @when('they continue and confirm that the organisation and survey that they are enrolling for is correct')
 def confirm_organisation_and_continue(context):
     browser.find_by_id('CONTINUE_BTN').click()
+    browser.find_by_id('CONFIRM_SURVEY_BTN').click()
 
 
 @then('the new survey is to be listed in My Surveys')
@@ -62,5 +71,3 @@ def click_cancel(context):
 @then('the user is navigated back to their "To do" list and have not enrolled for that survey')
 def view_todo_list(context):
     browser.find_by_id('SURVEY_TODO_TAB').first.has_class('btn btn--secondary btn--border navigation-tabs__tab navigation-tabs__tab--active')
-    current_url = context.current_url
-    print(current_url)
