@@ -4,7 +4,7 @@ Feature: Add a survey
   So that I can respond on behalf of a business
 
   Background: User already logged in
-    Given the user is signed into their account
+    Given the respondent is signed into their account
   
   @us334-addSurvey_s01
   Scenario: Select to add new survey

@@ -5,8 +5,8 @@ class Config(object):
     PROTOCOL = os.getenv('PROTOCOL', 'http')
     INFO = '/info'
 
-    USERNAME = os.getenv('USERNAME', 'example@example.com')
-    PASSWORD = os.getenv('PASSWORD', 'password')
+    RESPONDENT_USERNAME = os.getenv('USERNAME', 'example@example.com')
+    RESPONDENT_PASSWORD = os.getenv('PASSWORD', 'password')
 
     ACTION_SERVICE_HOST = os.getenv('ACTION_SERVICE_HOST', 'localhost')
     ACTION_SERVICE_PORT = os.getenv('ACTION_SERVICE_PORT', 8151)
@@ -79,6 +79,9 @@ class Config(object):
     SURVEY_SERVICE_HOST = os.getenv('SURVEY_SERVICE_HOST', 'localhost')
     SURVEY_SERVICE_PORT = os.getenv('SURVEY_SERVICE_PORT', 8080)
     SURVEY_SERVICE = '{}://{}:{}'.format(PROTOCOL, SURVEY_SERVICE_HOST, SURVEY_SERVICE_PORT)
+
+    INTERNAL_USERNAME = os.getenv('INTERNAL_USERNAME', 'user')
+    INTERNAL_PASSWORD = os.getenv('INTERNAL_PASSWORD', 'pass')
 
     CF_DATABASE_TOOL_HOST = os.getenv('CF_DATABASE_TOOL_HOST', 'localhost')
     CF_DATABASE_TOOL_PORT = os.getenv('CF_DATABASE_TOOL_PORT', 9000)

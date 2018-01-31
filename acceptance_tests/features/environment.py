@@ -2,6 +2,7 @@ from acceptance_tests import browser
 
 from controllers import collection_exercise_controller, database_controller, sample_controller, party_controller, django_oauth_controller, case_controller
 from config import Config
+from acceptance_tests.features.steps import common
 
 
 def after_all(context):
@@ -14,6 +15,7 @@ def after_all(context):
 def before_all(context):
     database_controller.reset_rm_database('resources/database/database_reset_rm.sql')
     database_controller.reset_ras_database()
+    common.signed_in_frontstage(context)
     enrolment_setup()
 
 
@@ -22,10 +24,10 @@ def enrolment_setup():
     sample_controller.load_sample(test_file=test_file)
     collection_exercise_controller.execute_collection_exercise()
     valid_enrolment_code = database_controller.select_iac()
-    respondent_info = party_controller.register_respondent(email_address=Config.USERNAME,
+    respondent_info = party_controller.register_respondent(email_address=Config.RESPONDENT_USERNAME,
                                                            first_name='first_name',
                                                            last_name='last_name',
-                                                           password=Config.PASSWORD,
+                                                           password=Config.RESPONDENT_PASSWORD,
                                                            phone_number='0987654321',
                                                            enrolment_code=valid_enrolment_code
                                                            )
