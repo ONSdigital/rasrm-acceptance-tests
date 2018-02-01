@@ -24,6 +24,6 @@ def post_case_event(case_id, party_uuid, category, description):
     response = requests.post(url, json=payload, auth=Config.BASIC_AUTH)
 
     if response.status_code != 201:
-        logger.error('Failed to post case event')
+        logger.error('Failed to post case event', status=response.status_code)
 
     return json.loads(response.text)

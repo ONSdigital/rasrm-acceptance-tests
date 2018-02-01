@@ -15,7 +15,7 @@ def signed_in_frontstage(context):
 
 
 @then('the user signs out')
-def signed_out(context):
+def signed_out_frontstage(context):
     browser.find_by_id('SIGN_OUT_BUTTON').click()
 
 

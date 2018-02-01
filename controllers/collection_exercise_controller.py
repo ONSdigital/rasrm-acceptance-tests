@@ -21,7 +21,7 @@ def execute_collection_exercise():
             response = requests.post(url=url, auth=Config.BASIC_AUTH)
 
             if response.status_code != 200:
-                logger.error('Failed to post collection exercise execution')
+                logger.error('Failed to post collection exercise execution', status=response.status_code)
 
             logger.info('Waiting for collection exercises execution process to finish...')
             time.sleep(160)
