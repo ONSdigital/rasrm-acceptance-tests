@@ -7,7 +7,7 @@ system_tests:
 	pipenv run behave system_tests/features # This will only run the system tests
 
 acceptance_tests: system_tests tmp_rm_tools
-    pipenv run python set_up_ce_execution.py
+	pipenv run python set_up_ce_execution.py
 	pipenv run behave acceptance_tests/features # This will only run the acceptance tests
 
 install:
