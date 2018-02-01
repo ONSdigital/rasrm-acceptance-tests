@@ -56,7 +56,10 @@ def select_iac():
     headers = {
         'Content-Type': 'text/plain'
     }
-    sql_statement = "SELECT c.iac FROM casesvc.case c INNER JOIN iac.iac i ON c.iac = i.code WHERE i.active = true AND i.lastuseddatetime IS NULL AND c.SampleUnitType = 'B' ORDER BY i.createddatetime DESC LIMIT 1;"
+    sql_statement = "SELECT c.iac FROM casesvc.case c " \
+                    "INNER JOIN iac.iac i ON c.iac = i.code " \
+                    "WHERE i.active = true AND i.lastuseddatetime IS NULL AND c.SampleUnitType = 'B' " \
+                    "ORDER BY i.createddatetime DESC LIMIT 1;"
     response = requests.post(url, auth=Config.BASIC_AUTH, headers=headers, data=sql_statement)
     return response.text[4:-1]
 
@@ -64,9 +67,14 @@ def select_iac():
 def enrol_party(respondant_uuid):
     case_id = None
 
-    sql_statement_update_enrolment = f"UPDATE partysvc.enrolment SET status = 'ENABLED' WHERE respondent_id = (SELECT id FROM partysvc.respondent WHERE party_uuid = '{respondant_uuid}');"
-    sql_get_case_id = f"SELECT case_id FROM partysvc.pending_enrolment WHERE respondent_id = (SELECT id FROM partysvc.respondent WHERE party_uuid = '{respondant_uuid}');"
-    sql_delete_pending_enrolment = f"DELETE FROM partysvc.pending_enrolment WHERE respondent_id = (SELECT id FROM partysvc.respondent WHERE party_uuid = '{respondant_uuid}');"
+    sql_statement_update_enrolment = f"UPDATE partysvc.enrolment SET status = 'ENABLED' " \
+                                     f"WHERE respondent_id = (SELECT id FROM partysvc.respondent " \
+                                     f"WHERE party_uuid = '{respondant_uuid}');"
+    sql_get_case_id = f"SELECT case_id FROM partysvc.pending_enrolment " \
+                      f"WHERE respondent_id = (SELECT id FROM partysvc.respondent WHERE party_uuid = '{respondant_uuid}');"
+    sql_delete_pending_enrolment = f"DELETE FROM partysvc.pending_enrolment " \
+                                   f"WHERE respondent_id = " \
+                                   f"(SELECT id FROM partysvc.respondent WHERE party_uuid = '{respondant_uuid}');"
 
     engine = create_engine(Config.PARTY_DATABASE_URI)
     connection = engine.connect()
