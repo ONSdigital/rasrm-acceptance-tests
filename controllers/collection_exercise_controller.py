@@ -24,7 +24,7 @@ def execute_collection_exercise():
                 logger.error('Failed to post collection exercise execution', status=response.status_code)
 
             logger.info('Waiting for collection exercises execution process to finish...')
-            time.sleep(160)
+            time.sleep(240)
             logger.info('Exercises execution process finished')
 
             return
