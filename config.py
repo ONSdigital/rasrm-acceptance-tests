@@ -95,4 +95,5 @@ class Config(object):
     OAUTH_CLIENT_SECRET = os.getenv('OAUTH_CLIENT_SECRET', 'password')
 
     PARTY_DATABASE_URI = os.getenv('PARTY_DATABASE_URI', "postgres://postgres:postgres@localhost:6432/postgres")
-    DJANGO_OAUTH_DATABASE_URI = os.getenv('DJANGO_OAUTH_DATABASE_URI', "postgres://postgres:postgres@localhost:6432/postgres")
+    DJANGO_OAUTH_DATABASE_URI = os.getenv('DJANGO_OAUTH_DATABASE_URI',
+                                          "postgres://postgres:postgres@localhost:6432/postgres")
