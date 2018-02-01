@@ -29,7 +29,7 @@ make tmp_rm_tools # Will load data for tests
 Use Response-Operations-UI to load collection instruments manually.
 Then:
 ```bash
-make setup
+make set_up
 make acceptance_tests # Will load any data needed for the tests and run the system tests and acceptance tests
 ```
 

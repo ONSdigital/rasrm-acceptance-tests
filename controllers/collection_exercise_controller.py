@@ -26,5 +26,3 @@ def execute_collection_exercise():
             logger.info('Waiting for collection exercises execution process to finish...')
             time.sleep(240)
             logger.info('Exercises execution process finished')
-
-            return

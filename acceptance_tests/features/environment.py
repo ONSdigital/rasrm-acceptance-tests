@@ -1,9 +1,8 @@
 from acceptance_tests import browser
-
+from acceptance_tests.features.steps import common
+from config import Config
 from controllers import collection_exercise_controller, database_controller, sample_controller
 from controllers import party_controller, django_oauth_controller, case_controller
-from config import Config
-from acceptance_tests.features.steps import common
 
 
 def after_all(context):
