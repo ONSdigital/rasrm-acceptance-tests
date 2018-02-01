@@ -67,15 +67,9 @@ def select_iac():
 def enrol_party(respondant_uuid):
     case_id = None
 
-    sql_statement_update_enrolment = f"UPDATE partysvc.enrolment SET status = 'ENABLED' " \
-                                     f"WHERE respondent_id = (SELECT id FROM partysvc.respondent " \
-                                     f"WHERE party_uuid = '{respondant_uuid}');"
-    sql_get_case_id = f"SELECT case_id FROM partysvc.pending_enrolment " \
-                      f"WHERE respondent_id = " \
-                      f"(SELECT id FROM partysvc.respondent WHERE party_uuid = '{respondant_uuid}');"
-    sql_delete_pending_enrolment = f"DELETE FROM partysvc.pending_enrolment " \
-                                   f"WHERE respondent_id = " \
-                                   f"(SELECT id FROM partysvc.respondent WHERE party_uuid = '{respondant_uuid}');"
+    sql_statement_update_enrolment = f"UPDATE partysvc.enrolment SET status = 'ENABLED' WHERE respondent_id = (SELECT id FROM partysvc.respondent WHERE party_uuid = '{respondant_uuid}');"  # NOQA
+    sql_get_case_id = f"SELECT case_id FROM partysvc.pending_enrolment WHERE respondent_id = (SELECT id FROM partysvc.respondent WHERE party_uuid = '{respondant_uuid}');"  # NOQA
+    sql_delete_pending_enrolment = f"DELETE FROM partysvc.pending_enrolment WHERE respondent_id = (SELECT id FROM partysvc.respondent WHERE party_uuid = '{respondant_uuid}');"  # NOQA
 
     engine = create_engine(Config.PARTY_DATABASE_URI)
     connection = engine.connect()
