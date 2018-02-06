@@ -26,3 +26,19 @@ def click_message_send_button():
 
 def click_cancel_button():
     browser.find_by_id('cancel-button').click()
+
+
+def enter_text_in_message_subject(text):
+    browser.driver.find_element_by_id('secure-message-subject').send_keys(text)
+
+
+def enter_text_in_message_body(text):
+    browser.driver.find_element_by_id('secure-message-body').send_keys(text)
+
+
+def message_subject_text():
+    return browser.driver.find_element_by_id('secure-message-subject').text
+
+
+def message_body_text():
+    return browser.driver.find_element_by_id('secure-message-body').text
