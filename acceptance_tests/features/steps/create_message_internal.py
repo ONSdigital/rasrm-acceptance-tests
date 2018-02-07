@@ -55,14 +55,14 @@ def user_able_to_enter_message_body(_):
 
 @when("they enter text in the subject and body of the message")
 @given("the user has entered text in the subject and body of the message")
-def user_has_entered_text_in_subject_and_body(*_):
+def user_has_entered_text_in_subject_and_body(_):
     create_message_internal.enter_text_in_message_subject('Message subject')
     create_message_internal.enter_text_in_message_body('Message body')
 
 
 @then("they are able to send the message")
 @when("they select send")
-def user_is_able_to_send_message(*_):
+def user_is_able_to_send_message(_):
     create_message_internal.click_message_send_button()
     # TODO assert that the sending succeeds
 
@@ -86,9 +86,9 @@ def user_is_navigated_to_inbox(_):
 
 
 @given("the user has sent a secure message")
-def user_sent_secure_message(*_):
-    user_has_entered_text_in_subject_and_body()
-    user_is_able_to_send_message()
+def user_sent_secure_message(_):
+    user_has_entered_text_in_subject_and_body(_)
+    user_is_able_to_send_message(_)
 
 
 @then("they are presented with confirmation that the message has been sent")
