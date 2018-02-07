@@ -7,8 +7,8 @@ from config import Config
 def go_to(respondent_details_dict):
     # TODO This must be updated when the method of passing respondent details is finalised
 
-    browser.visit('{}/messages/create-message?ru={}'
-                  .format(Config.RESPONSE_OPERATIONS_UI, urlencode(respondent_details_dict)))
+    browser.visit('{}/messages/create-message?{}'
+                  .format(Config.RESPONSE_OPERATIONS_UI, urlencode({'ru': urlencode(respondent_details_dict)})))
 
 
 def found_respondent_details():
@@ -20,12 +20,28 @@ def found_respondent_details():
             'to': 'Jacky Turner'}
 
 
+def get_ru_details_attributes():
+    ru_details_table = browser.find_by_id("ru-details-table").first
+    ru_details_table_attributes = {'survey': ru_details_table.find_by_id('survey-label').value,
+                                   'ru_ref': ru_details_table.find_by_id('ru-ref-label').value,
+                                   'business': ru_details_table.find_by_id('business-label').value,
+                                   'to': ru_details_table.find_by_id('to-label').value}
+    return ru_details_table_attributes
+
+
+def get_subject_and_body():
+    form_text_fields = browser.find_by_id("create-message-form").first
+    form_text_field_attributes = {'subject': form_text_fields.find_by_id('secure-message-subject').value,
+                                  'body': form_text_fields.find_by_id('secure-message-body').value}
+    return form_text_field_attributes
+
+
 def click_message_send_button():
-    browser.find_by_id('send-message').click()
+    browser.find_by_id('btn-send-message').click()
 
 
 def click_cancel_button():
-    browser.find_by_id('cancel-button').click()
+    browser.find_by_id('btn-cancel').click()
 
 
 def enter_text_in_message_subject(text):
@@ -36,9 +52,17 @@ def enter_text_in_message_body(text):
     browser.driver.find_element_by_id('secure-message-body').send_keys(text)
 
 
-def message_subject_text():
-    return browser.driver.find_element_by_id('secure-message-subject').text
+def get_message_subject_text():
+    return get_subject_and_body().get('subject')
 
 
-def message_body_text():
-    return browser.driver.find_element_by_id('secure-message-body').text
+def get_message_body_text():
+    return get_subject_and_body().get('body')
+
+
+def clear_message_subject_text():
+    browser.driver.find_element_by_id('secure-message-subject').clear()
+
+
+def clear_message_body_text():
+    browser.driver.find_element_by_id('secure-message-body').clear()

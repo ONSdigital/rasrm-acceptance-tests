@@ -31,11 +31,13 @@ Feature: Internal user to send message
     Then they are navigated back to the page in which they navigated from
 
   Scenario: On sending the message the user is to be navigated to the inbox
-    Given the user has entered text in the subject and body of the message
+    Given the user is on the send message page
+    And the user has entered text in the subject and body of the message
     When they select send
     Then they are navigated to the inbox of messages
 
   Scenario: On sending the message the user is to receive confirmation that the message has been sent
-    Given the user has sent a secure message
+    Given the user is on the send message page
+    And the user has sent a secure message
     When they are navigated to the inbox of messages
     Then they are presented with confirmation that the message has been sent

@@ -21,6 +21,10 @@ def signed_out_internal(context):
 
 @given('The internal user is already signed in')
 def signed_in_rops(_):
+    try:
+        signed_out_internal(_)
+    except AttributeError:
+        pass
     sign_in_internal.go_to()
     sign_in_internal.enter_correct_username()
     sign_in_internal.enter_correct_password()
