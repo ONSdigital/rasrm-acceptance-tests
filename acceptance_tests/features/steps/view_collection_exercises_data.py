@@ -1,7 +1,6 @@
 from behave import given, when, then
 
 from acceptance_tests.features.pages import collection_exercise
-from acceptance_tests.features.pages import survey
 
 
 @given('collection exercises for {survey} exist in the system')
