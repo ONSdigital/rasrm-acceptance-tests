@@ -18,12 +18,6 @@ Feature: View Collection Exercise
       | 1806   | 15 June 2018           | Created |
       | 1809   | 14 September 2018      | Created |
       | 1812   | 14 December 2018       | Created |
-    And they are able to see the status for each collection exercise
-      | period | shown_to_respondent_as | status  |
-      | 1803   | 9 March 2018           | Created |
-      | 1806   | 15 June 2018           | Created |
-      | 1809   | 14 September 2018      | Created |
-      | 1812   | 14 December 2018       | Created |
     And the internal user signs out
 
 

@@ -42,20 +42,6 @@ def the_internal_user_can_view_all_collection_exercises_for_qbs(context):
                                                      collection_exercises))
         assert collection_exercises_by_period['exercise_ref'].value == row['period']
         assert collection_exercises_by_period['user_description'].value == row['shown_to_respondent_as']
-
-
-@then('they are able to see the status for each collection exercise')
-def they_are_able_to_see_the_status_for_each_collection_exercise(context):
-    # Validate collection exercise table headers
-    table_headers = collection_exercise.get_table_headers()
-    required_headers = ['Period', 'Shown to respondent as', 'Status']
-    assert table_headers == ' '.join(required_headers)
-
-    # Validate rows to ensure values are in the correct columns
-    collection_exercises = collection_exercise.get_collection_exercises()
-    for row in context.table:
-        collection_exercises_by_period = next(filter(lambda ce: ce['exercise_ref'].value == row['period'],
-                                                     collection_exercises))
         assert collection_exercises_by_period['state'].value == row['status']
 
 
