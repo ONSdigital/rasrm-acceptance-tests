@@ -36,9 +36,9 @@ def user_enters_text_in_message_body(_):
 @then("they are able to enter free text up to and including 100 characters")
 def user_able_to_enter_subject(_):
 
-    # TODO this will fail until the criteria are changed (actual limit is 96)
+    # The assertion uses 96 characters because 're: ' may be appended for replies
     create_message_internal.enter_text_in_message_subject('1' * 100)
-    assert create_message_internal.get_message_subject_text() == ('1' * 100)  # Expected to fail
+    assert create_message_internal.get_message_subject_text() == ('1' * 96)
 
     create_message_internal.enter_text_in_message_subject('1' * 200)
     assert len(create_message_internal.get_message_subject_text()) <= 100
