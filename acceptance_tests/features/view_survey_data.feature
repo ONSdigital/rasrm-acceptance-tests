@@ -4,7 +4,7 @@ Feature: View survey data
   So that I am assured the survey details are correct
 
   Background: Internal user is already signed in
-    Given The internal user is already signed in
+    Given the internal user is already signed in
 
   Scenario: View all default surveys
     Given surveys exist in the system
@@ -27,4 +27,3 @@ Feature: View survey data
       | 225       | Outward Foreign Affiliates Statistics Survey                  | OFATS             | Statistics of Trade Act 1947        |
       | 500       | Government Research and Development Survey                    | GovERD            | GovERD                              |
       | 221       | Business Register and Employment Survey                       | BRES              | Statistics of Trade Act 1947        |
-    And the internal user signs out
