@@ -81,8 +81,8 @@ def user_is_navigated_back(_):
 @then("they are navigated to the inbox of messages")
 @when("they are navigated to the inbox of messages")
 def user_is_navigated_to_inbox(_):
-    # TODO update with correct inbox url
-    assert 'messages/inbox' in browser.url  # Expected to fail, inbox doesn't exist yet
+    assert 'messages/' in browser.url
+    user_is_given_message_sent_confirmation(_)
 
 
 @given("the user has sent a secure message")
@@ -93,4 +93,4 @@ def user_sent_secure_message(_):
 
 @then("they are presented with confirmation that the message has been sent")
 def user_is_given_message_sent_confirmation(_):
-    browser.driver.find_element_by_id("message-sent-confirmation")
+    assert create_message_internal.get_first_flashed_message() == "Message sent."
