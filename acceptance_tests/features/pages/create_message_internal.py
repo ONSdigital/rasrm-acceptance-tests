@@ -33,7 +33,7 @@ class RespondentDetails:
         post_case_event(case_id, respondent_party['id'], "RESPONDENT_ENROLED", "Respondent enrolled")
         return respondent_party['id']
 
-    def _retrieve_respondent_and_ru_details(self):
+    def _create_respondent_and_get_details(self):
         if not self._respondent_id:
             self._respondent_id = self._create_respondent()
             url = f'{Config.PARTY_SERVICE}/party-api/v1/respondents/id/{self._respondent_id}'
@@ -45,17 +45,17 @@ class RespondentDetails:
 
     def get_respondent_id(self):
         if not self._respondent_id:
-            self._retrieve_respondent_and_ru_details()
+            self._create_respondent_and_get_details()
         return self._respondent_id
 
     def get_ru_id(self):
         if not self._ru_id:
-            self._retrieve_respondent_and_ru_details()
+            self._create_respondent_and_get_details()
         return self._ru_id
 
     def get_ru_ref(self):
         if not self._ru_ref:
-            self._retrieve_respondent_and_ru_details()
+            self._create_respondent_and_get_details()
         return self._ru_ref
 
 
