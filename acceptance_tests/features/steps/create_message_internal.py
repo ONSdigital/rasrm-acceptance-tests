@@ -44,7 +44,7 @@ def user_able_to_enter_subject(_):
     create_message_internal.enter_text_in_message_subject('1' * 100)
     assert create_message_internal.get_message_subject_text() == ('1' * 96)
 
-    create_message_internal.enter_text_in_message_subject('1' * 200)
+    create_message_internal.enter_text_in_message_subject('1' * 110)
     assert len(create_message_internal.get_message_subject_text()) <= 100
 
 
@@ -53,7 +53,7 @@ def user_able_to_enter_message_body(_):
     create_message_internal.enter_text_in_message_body('1' * 10000)
     assert create_message_internal.get_message_body_text() == ('1' * 10000)
 
-    create_message_internal.enter_text_in_message_body('1' * 20000)
+    create_message_internal.enter_text_in_message_body('1' * 10010)
     assert len(create_message_internal.get_message_body_text()) <= 10000
 
 
