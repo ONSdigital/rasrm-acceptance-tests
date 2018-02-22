@@ -1,26 +1,73 @@
-from urllib.parse import urlencode
+import requests
 
 from acceptance_tests import browser
 from config import Config
+from controllers.case_controller import post_case_event
+from controllers.collection_exercise_controller import get_collection_exercise
+from controllers.database_controller import get_iac_for_collection_exercise, enrol_party
+from controllers.django_oauth_controller import verify_user
+from controllers.party_controller import register_respondent
 
 
-def go_to(respondent_details_dict):
-    # TODO This must be updated when the method of passing respondent details is finalised
+class RespondentDetails:
 
+    def __init__(self):
+        self._respondent_id = None
+        self._ru_id = None
+        self._ru_ref = None
+
+    @staticmethod
+    def _create_respondent():
+        collection_exercise_id = get_collection_exercise(
+            'cb8accda-6118-4d3b-85a3-149e28960c54',
+            '201801')['id']
+        enrolment_code = get_iac_for_collection_exercise(collection_exercise_id)
+        respondent_party = register_respondent(email_address='ropstest@example.com',
+                                               first_name='first_name',
+                                               last_name='last_name',
+                                               password='secret',
+                                               phone_number='0187654321',
+                                               enrolment_code=enrolment_code)
+        verify_user(respondent_party['emailAddress'])
+        case_id = enrol_party(respondent_party['id'])
+        post_case_event(case_id, respondent_party['id'], "RESPONDENT_ENROLED", "Respondent enrolled")
+        return respondent_party['id']
+
+    def _retrieve_respondent_and_ru_details(self):
+        if not self._respondent_id:
+            self._respondent_id = self._create_respondent()
+            url = f'{Config.PARTY_SERVICE}/party-api/v1/respondents/id/{self._respondent_id}'
+            response = requests.get(url=url, auth=Config.BASIC_AUTH)
+            response.raise_for_status()
+            respondent_details = response.json()
+            self._ru_id = respondent_details['associations'][0]['partyId']
+            self._ru_ref = respondent_details['associations'][0]['sampleUnitRef']
+
+    def get_respondent_id(self):
+        if not self._respondent_id:
+            self._retrieve_respondent_and_ru_details()
+        return self._respondent_id
+
+    def get_ru_id(self):
+        if not self._ru_id:
+            self._retrieve_respondent_and_ru_details()
+        return self._ru_id
+
+    def get_ru_ref(self):
+        if not self._ru_ref:
+            self._retrieve_respondent_and_ru_details()
+        return self._ru_ref
+
+
+RESPONDENT_DETAILS = RespondentDetails()
+
+
+def go_to():
     browser.visit(f'{Config.RESPONSE_OPERATIONS_UI}'
-                  "/messages/create-message?"
-                  f"{urlencode({'ru_details': urlencode(respondent_details_dict)})}")
-
-
-def found_respondent_details():
-    # TODO This must be updated when the method of passing respondent details is finalised
-
-    return {'survey': 'BRES 2017',
-            'ru_ref': '49900000498',
-            'business': 'Bolts & Rachets Ltd',
-            'to': 'Jacky Turner',
-            'to_uuid': 'f62dfda8-73b0-4e0e-97cf-1b06327a6712',
-            'to_ru_id': 'c614e64e-d981-4eba-b016-d9822f09a4fb'}
+                  "/reporting-units/"
+                  f"{RESPONDENT_DETAILS.get_ru_ref()}")
+    browser.find_by_id("create-message-button-1").click()
+    assert "messages/create-message" in browser.url
 
 
 def get_ru_details_attributes():
@@ -32,6 +79,13 @@ def get_ru_details_attributes():
                                    'to_uuid': ru_details_table.find_by_id('hidden_to_uuid').value,
                                    'to_ru_id': ru_details_table.find_by_id('hidden_to_ru_id').value}
     return ru_details_table_attributes
+
+
+def found_respondent_details():
+    return {'ru_ref': RESPONDENT_DETAILS.get_ru_ref(),
+            'to': 'first_name last_name',
+            'to_uuid': RESPONDENT_DETAILS.get_respondent_id(),
+            'to_ru_id': RESPONDENT_DETAILS.get_ru_id()}
 
 
 def get_subject_and_body():

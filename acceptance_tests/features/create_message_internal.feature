@@ -5,6 +5,7 @@ Feature: Internal user to send message
 
   Background: User already logged in
     Given the internal user is already signed in
+    And The internal user has found the associated respondent
 
   Scenario: 'To' field will be pre-populated with respondent name (up to 100 characters)
     When they choose to send them a secure message and navigated to the 'send message' page

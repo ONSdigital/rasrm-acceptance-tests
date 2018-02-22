@@ -4,17 +4,21 @@ from acceptance_tests import browser
 from acceptance_tests.features.pages import create_message_internal
 
 
+@given("The internal user has found the associated respondent")
+def user_has_found_respondent(_):
+    assert create_message_internal.RESPONDENT_DETAILS.get_respondent_id() is not None
+    assert create_message_internal.RESPONDENT_DETAILS.get_ru_id() is not None
+    assert create_message_internal.RESPONDENT_DETAILS.get_ru_ref() is not None
+
+
 @when("they choose to send them a secure message and navigated to the 'send message' page")
 @given("the user is on the send message page")
 def navigate_to_send_message(_):
-    # TODO This must be updated when the method of passing respondent details is finalised
-
-    create_message_internal.go_to(create_message_internal.found_respondent_details())
+    create_message_internal.go_to()
 
 
 @then("the \'To\' field is populated with the respondent's name")
 def check_to_field(_):
-    # TODO This must be updated when the method of passing respondent details is finalised
     to_field = create_message_internal.get_ru_details_attributes().get('to')
     assert str(to_field) == create_message_internal.found_respondent_details().get('to')
 
@@ -64,7 +68,7 @@ def user_has_entered_text_in_subject_and_body(_):
 @when("they select send")
 def user_is_able_to_send_message(_):
     create_message_internal.click_message_send_button()
-    # TODO assert that the sending succeeds
+    user_is_navigated_to_inbox(_)
 
 
 @when("they choose to cancel out of sending a message")
@@ -74,8 +78,7 @@ def user_cancels_sending_message(_):
 
 @then("they are navigated back to the page in which they navigated from")
 def user_is_navigated_back(_):
-    # TODO this not implemented yet
-    assert False  # Expected to fail, this is not implemented
+    assert f"reporting-units/{create_message_internal.RESPONDENT_DETAILS.get_ru_ref()}" in browser.url
 
 
 @then("they are navigated to the inbox of messages")
