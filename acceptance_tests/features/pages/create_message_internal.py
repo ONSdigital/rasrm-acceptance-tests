@@ -6,7 +6,7 @@ from controllers.case_controller import post_case_event
 from controllers.collection_exercise_controller import get_collection_exercise
 from controllers.database_controller import get_iac_for_collection_exercise, enrol_party
 from controllers.django_oauth_controller import verify_user
-from controllers.party_controller import register_respondent
+from controllers.party_controller import register_respondent, get_respondent_details
 
 
 class RespondentDetails:
@@ -36,10 +36,7 @@ class RespondentDetails:
     def _create_respondent_and_get_details(self):
         if not self._respondent_id:
             self._respondent_id = self._create_respondent()
-            url = f'{Config.PARTY_SERVICE}/party-api/v1/respondents/id/{self._respondent_id}'
-            response = requests.get(url=url, auth=Config.BASIC_AUTH)
-            response.raise_for_status()
-            respondent_details = response.json()
+            respondent_details = get_respondent_details(self._respondent_id)
             self._ru_id = respondent_details['associations'][0]['partyId']
             self._ru_ref = respondent_details['associations'][0]['sampleUnitRef']
 
