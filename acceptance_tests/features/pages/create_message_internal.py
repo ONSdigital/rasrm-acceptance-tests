@@ -1,5 +1,3 @@
-import requests
-
 from acceptance_tests import browser
 from config import Config
 from controllers.case_controller import post_case_event
