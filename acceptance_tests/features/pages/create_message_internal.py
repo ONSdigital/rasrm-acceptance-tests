@@ -2,6 +2,7 @@ from acceptance_tests import browser
 from common.respondent_details import RESPONDENT_DETAILS
 from config import Config
 
+
 def go_to():
     browser.visit(f'{Config.RESPONSE_OPERATIONS_UI}'
                   "/reporting-units/"
