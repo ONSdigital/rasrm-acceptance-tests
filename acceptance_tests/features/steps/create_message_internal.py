@@ -37,24 +37,27 @@ def user_enters_text_in_message_body(_):
     create_message_internal.clear_message_body_text()
 
 
-@then("they are able to enter free text up to and including 100 characters")
+@then("they are able to enter free text up to and including 96 characters")
 def user_able_to_enter_subject(_):
+    create_message_internal.enter_text_in_message_subject('a' * 96)
+    assert create_message_internal.get_message_subject_text() == ('a' * 96)
 
-    # The assertion uses 96 characters because 're: ' may be appended for replies
-    create_message_internal.enter_text_in_message_subject('1' * 100)
-    assert create_message_internal.get_message_subject_text() == ('1' * 96)
-
-    create_message_internal.enter_text_in_message_subject('1' * 110)
-    assert len(create_message_internal.get_message_subject_text()) <= 100
+    create_message_internal.enter_text_in_message_subject('a' * 10)
+    assert len(create_message_internal.get_message_subject_text()) <= 96
+    create_message_internal.clear_message_subject_text()
 
 
 @then("they are able to enter free text up to and including 10,000 characters")
 def user_able_to_enter_message_body(_):
-    create_message_internal.enter_text_in_message_body('1' * 10000)
-    assert create_message_internal.get_message_body_text() == ('1' * 10000)
+    create_message_internal.enter_text_in_message_body_with_javascript('a' * 9990)
+    create_message_internal.enter_text_in_message_body('a' * 10)
+    assert create_message_internal.get_message_body_text() == ('a' * 10000)
 
-    create_message_internal.enter_text_in_message_body('1' * 10010)
-    assert len(create_message_internal.get_message_body_text()) <= 10000
+    create_message_internal.clear_message_body_text()
+    create_message_internal.enter_text_in_message_body_with_javascript('a' * 10000)
+    create_message_internal.enter_text_in_message_body('a' * 10)
+    assert len(create_message_internal.get_message_body_text()) == 10000
+    create_message_internal.clear_message_body_text()
 
 
 @when("they enter text in the subject and body of the message")

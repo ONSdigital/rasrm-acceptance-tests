@@ -111,6 +111,10 @@ def enter_text_in_message_body(text):
     browser.driver.find_element_by_id('secure-message-body').send_keys(text)
 
 
+def enter_text_in_message_body_with_javascript(text):
+    browser.execute_script(f'document.getElementById("secure-message-body").value="{text}";')
+
+
 def get_message_subject_text():
     return get_subject_and_body().get('subject')
 

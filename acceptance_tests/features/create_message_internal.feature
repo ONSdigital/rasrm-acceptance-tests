@@ -11,10 +11,10 @@ Feature: Internal user to send message
     When they choose to send them a secure message and navigated to the 'send message' page
     Then the 'To' field is populated with the respondent's name
 
-  Scenario: User is able to enter free text in the subject field up to and including 100 characters
+  Scenario: User is able to enter free text in the subject field up to and including 96 characters
     Given the user is on the send message page
     When they enter text in the subject of the message
-    Then they are able to enter free text up to and including 100 characters
+    Then they are able to enter free text up to and including 96 characters
 
   Scenario: User is able to enter free text  in the body of the message up to and including 10,000 characters
     Given the user is on the send message page
