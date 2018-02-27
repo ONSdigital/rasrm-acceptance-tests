@@ -9,6 +9,7 @@ Feature: Internal inbox
   @sm111_s01
   Scenario: If there are no messages the user will be informed of this.
     Given the user has access to secure messaging
+    And the user has no messages in their inbox
     When they navigate to the inbox messages
     Then they are informed that there are no messages
 

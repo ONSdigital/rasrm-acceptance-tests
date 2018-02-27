@@ -5,7 +5,7 @@ from behave import given, when, then
 
 from acceptance_tests.features.pages import home, inbox
 from common.respondent_details import RESPONDENT_DETAILS
-from controllers import messages_controller
+from controllers import messages_controller, database_controller
 
 
 @given('the user has access to secure messaging')
@@ -21,6 +21,11 @@ def populate_database_with_messages(_):
     # 1 sec sleep so that there is a different timestamp on the message
     time.sleep(1)
     messages_controller.create_message(respondent_id, "test subject2", "test body2", ru_id)
+
+
+@given('the user has no messages in their inbox')
+def user_has_no_messages_in_inbox(_):
+    database_controller.reset_secure_message_database()
 
 
 @when('they navigate to the inbox messages')
