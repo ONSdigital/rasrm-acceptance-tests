@@ -30,8 +30,9 @@ def internal_user_views_correct_reporting_unit_details(_):
 @then('the internal user is presented with the associated surveys')
 def internal_internal_user_presented_correct_associated_surveys(_):
     associated_surveys = reporting_unit.get_associated_surveys()
-    assert len(associated_surveys) == 1
+    assert len(associated_surveys) == 2
     assert '074 Bricks' in associated_surveys
+    assert '139 QBS' in associated_surveys
 
 
 @then('the internal user is presented with the associated collection exercises')
@@ -44,7 +45,7 @@ def internal_internal_user_presented_correct_associated_collection_exercises(_):
         browser.reload()
         associated_ces = reporting_unit.get_associated_collection_exercises()
         time.sleep(1)
-    assert len(associated_ces) == 1
+    assert len(associated_ces) == 2
     assert associated_ces[0]['exercise_ref'] == '201801'
     assert associated_ces[0]['company_name'] == 'RUNAME1_COMPANY1 RUNNAME2_COMPANY1'
     assert associated_ces[0]['company_region'] == 'GB'
@@ -61,7 +62,7 @@ def internal_internal_user_presented_correct_associated_respondents(_):
         browser.reload()
         associated_respondents = reporting_unit.get_associated_respondents()
         time.sleep(1)
-    assert len(associated_respondents) == 1
+    assert len(associated_respondents) == 2
     assert associated_respondents[0]['enrolementStatus'] == 'Enabled'
     assert associated_respondents[0]['name'] == 'first_name last_name'
     assert associated_respondents[0]['email'] == 'example@example.com'
