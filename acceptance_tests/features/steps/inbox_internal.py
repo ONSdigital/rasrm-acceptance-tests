@@ -69,7 +69,7 @@ def test_select_survey_page_view(_):
     assert inbox_internal.get_radio_button_for_survey('Bricks')
 
 
-@given('the user has an unread message in their inbox')
+@when('the user has an unread message in their inbox')
 def internal_user_has_unread_message_in_inbox(_):
     messages_controller.create_message_external_to_internal()
 

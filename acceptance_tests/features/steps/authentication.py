@@ -1,4 +1,4 @@
-from behave import given
+from behave import given, when
 
 from acceptance_tests import browser
 from acceptance_tests.features.pages import sign_in_internal
@@ -17,6 +17,7 @@ def signed_in_respondent(_):
 
 
 @given('The internal user is already signed in')
+@when('the internal user is signed in')
 def signed_in_internal(_):
     sign_in_internal.go_to()
     # Only attempt to sign in if not already signed in otherwise implicitly redirected to homepage
