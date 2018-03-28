@@ -41,7 +41,6 @@ Feature: Internal inbox
   Scenario: User is able to distinguish unread messages in their inbox
     Given the user has no messages in their inbox
     When the user has an unread message in their inbox
-    And the internal user is signed in
     And they navigate to the inbox messages
     Then they are able to distinguish that the message is unread
 
@@ -49,7 +48,6 @@ Feature: Internal inbox
   Scenario: Messages are no longer distinguished as unread once they have been viewed
     Given the user has no messages in their inbox
     When the user has an unread message in their inbox
-    And the internal user is signed in
     And they navigate to the inbox messages
     And they view the unread message
     And they navigate to the inbox messages

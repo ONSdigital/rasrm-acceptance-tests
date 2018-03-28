@@ -5,6 +5,7 @@ from behave import given, when, then
 
 from acceptance_tests.features.pages import home, inbox_internal
 from acceptance_tests.features.pages.internal_conversation_view import go_to_thread
+from acceptance_tests.features.steps.authentication import signed_in_internal
 from controllers import messages_controller, database_controller
 
 
@@ -72,6 +73,9 @@ def test_select_survey_page_view(_):
 @when('the user has an unread message in their inbox')
 def internal_user_has_unread_message_in_inbox(_):
     messages_controller.create_message_external_to_internal()
+
+    # Sending external to internal may sign out the internal user
+    signed_in_internal(None)
 
 
 @then('they are able to distinguish that the message is unread')
