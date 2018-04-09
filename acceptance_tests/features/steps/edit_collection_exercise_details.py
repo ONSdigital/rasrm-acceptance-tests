@@ -47,5 +47,4 @@ def view_updated_collection_exercise_details(context):
 
 @then('they cannot edit the collection exercise period')
 def edit_period_icon_disappears_if_period_cannot_be_edited(_):
-    browser.find_by_id("edit-collection-exercise-period")
     assert not collection_exercise_details.check_edit_period_is_enabled()
