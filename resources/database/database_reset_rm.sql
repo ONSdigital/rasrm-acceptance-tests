@@ -32,6 +32,7 @@ UPDATE collectionexercise.collectionexercise SET statefk = 'SCHEDULED' where sta
 UPDATE collectionexercise.collectionexercise SET statefk = 'CREATED' where not statefk = 'SCHEDULED';
 
 UPDATE collectionexercise.collectionexercise SET exerciseref = '201808' WHERE survey_uuid = '75b19ea0-69a4-4c58-8d7f-4458c8f43f5c' and exerciseref = '201906';
+UPDATE survey.survey SET shortname = 'NBS', longname = 'National Balance Sheet' WHERE surveypk = '14';
 
 /* Clean Case DB */
 
