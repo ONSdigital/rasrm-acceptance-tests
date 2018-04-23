@@ -13,3 +13,5 @@ Feature: As an internal user
     Then they can view the updated survey details
       | survey_id | survey_title                 | survey_abbreviation | survey_legal_basis   |
       | 199       | National Balance Sheet 2.0   | NBS_2.0             | Voluntary Not Stated |
+    And they request to reset survey details
+    Then the data is reset

@@ -32,3 +32,23 @@ def view_updated_survey_details(context):
         assert survey_by_id['name'] == "National Balance Sheet 2.0"
         assert survey_by_id['short_name'] == "NBS_2.0"
         assert survey_by_id['legal_basis'] == "Voluntary Not Stated"
+
+# This is only a temporary measure to reset the data back to the way it initalially was to allow other features to pass correctly
+
+
+@when('they request to reset survey details')
+def reset_survey_details_page_for_nbs(_):
+    survey.click_edit_survey_details_button()
+
+
+@then('the data is reset')
+def reset_survey_details(_):
+    edit_survey_details_form.edit_short_name('NBS')
+    edit_survey_details_form.edit_long_name('National Balance Sheet')
+    edit_survey_details_form.click_save()
+
+
+
+
+
+
