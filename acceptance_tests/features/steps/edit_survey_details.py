@@ -36,6 +36,7 @@ def view_updated_survey_details(context):
 # This is only a temporary measure to reset the data back to the way it initalially was to allow other features to pass correctly
 
 
+@then('they request to reset survey details')
 @when('they request to reset survey details')
 def reset_survey_details_page_for_nbs(_):
     survey.click_edit_survey_details_button()
@@ -46,9 +47,3 @@ def reset_survey_details(_):
     edit_survey_details_form.edit_short_name('NBS')
     edit_survey_details_form.edit_long_name('National Balance Sheet')
     edit_survey_details_form.click_save()
-
-
-
-
-
-
