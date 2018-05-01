@@ -1,7 +1,7 @@
 from behave import given, when, then
 
 from acceptance_tests import browser
-from acceptance_tests.features.pages import create_collection_exercise, collection_exercise, survey
+from acceptance_tests.features.pages import create_collection_exercise, collection_exercise
 
 
 @given('internal user wants to create a collection exercise')
