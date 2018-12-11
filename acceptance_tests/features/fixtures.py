@@ -6,8 +6,8 @@ from common.collection_exercise_utilities import create_business_survey_period, 
     generate_new_enrolment_code_from_existing_code, make_user_description
 from common.internal_user_utilities import create_internal_user_login_account
 from common.respondent_utilities import create_enrolled_respondent_for_the_test_survey, create_respondent, \
-    create_respondent_data, create_respondent_email_address, create_respondent_user_login_account, \
-    create_ru_reference, create_unenrolled_respondent, register_respondent
+    create_respondent_data, create_respondent_email_address, create_respondent_user_login_account, create_ru_reference, \
+    create_unenrolled_respondent, create_unverified_respondent, register_respondent
 from common.survey_utilities import create_survey_reference, create_test_survey, format_survey_name, is_social_survey, \
     logger
 from config import Config
@@ -44,6 +44,12 @@ def setup_with_internal_user(context):
 def setup_data_with_internal_user(context):
     create_default_data(context)
     create_internal_user(context)
+
+
+@fixture
+def setup_data_with_enrolled_respondent_user(context):
+    create_default_data(context)
+    create_enrolled_respondent_for_the_test_survey(context)
 
 
 @fixture
@@ -180,6 +186,12 @@ def setup_data_with_enrolled_respondent_user_and_eq_collection_exercise_live(con
     collection_exercise_controller.wait_for_collection_exercise_state(context.survey_id, context.period,
                                                                       expected_state=COLLECTION_EXERCISE_STATUS_LIVE)
     create_enrolled_respondent_for_the_test_survey(context)
+
+
+@fixture
+def setup_data_with_unverified_respondent(context):
+    create_default_data(context)
+    create_unverified_respondent(context)
 
 
 def create_internal_user(context):
