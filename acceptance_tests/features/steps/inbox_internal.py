@@ -49,9 +49,20 @@ def informed_of_no_messages(_):
     assert inbox_internal.get_no_messages_text()
 
 
+@then('they are informed that there are no my_messages')
+def informed_of_no_my_messages(_):
+    assert inbox_internal.get_no_my_conversations_text()
+
+
 @when('they navigate to closed conversations')
 def internal_user_views_closed_messages(context):
     inbox_internal.go_to_closed_using_context(context)
+
+
+@given('they navigate to my messages')
+@when('they navigate to my messages')
+def internal_user_views_my_messages(context):
+    inbox_internal.go_to_my_conversations_using_context(context)
 
 
 @then('they are informed that there are no closed conversations')
