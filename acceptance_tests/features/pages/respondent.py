@@ -6,8 +6,12 @@ def go_to_find_respondent():
     browser.visit(f'{Config.RESPONSE_OPERATIONS_UI}/respondents/')
 
 
+def go_to_individual_respondent_page(id):
+    browser.visit(f'{Config.RESPONSE_OPERATIONS_UI}/respondents/respondent-details/{id}')
+
+
 def search_respondent_by_email(email):
-    browser.find_by_id('query').fill(email)
+    browser.find_by_id('email_address').fill(email)
     browser.find_by_id('btn-search-respondent').click()
 
 
@@ -26,7 +30,7 @@ def get_respondent_details():
 
 
 def not_found():
-    return 'No Respondent found' in browser.html
+    return '0 respondents found' in browser.html
 
 
 def click_edit_contact_details():
