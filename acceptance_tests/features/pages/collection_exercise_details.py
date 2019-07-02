@@ -5,12 +5,15 @@ from selenium.webdriver.support.ui import Select
 
 from acceptance_tests import browser
 from acceptance_tests.features.pages import collection_exercise
-from common import browser_utilities
+from common.browser_utilities import is_text_present_with_retry, \
+    wait_for_url_matches, wait_for_element_by_name, wait_for_element_by_id, wait_for_url_changed
 from config import Config
 
 
 def go_to(survey, period):
-    browser.visit(f'{Config.RESPONSE_OPERATIONS_UI}/surveys/{survey}/{period}')
+    target_url = f'{Config.RESPONSE_OPERATIONS_UI}/surveys/{survey}/{period}'
+    browser.visit(target_url)
+    wait_for_url_matches(target_url, timeout=4, retry=1)
 
 
 def get_page_title():
@@ -38,7 +41,7 @@ def load_sample(sample_file_path):
 
 
 def get_sample_success_text():
-    while not browser_utilities.is_text_present_with_retry('Sample loaded'):
+    while not is_text_present_with_retry('Sample loaded'):
         click_refresh_link_for_sample_upload()
     return browser.find_by_id('sample-success').first.text
 
@@ -54,12 +57,13 @@ def cancel_sample_preview():
 
 
 def get_loaded_sample():
-    if browser_utilities.is_text_present_with_retry('Total businesses'):
+    if is_text_present_with_retry('Total businesses'):
         tds = browser.find_by_id('sample-table').find_by_tag('tbody').find_by_tag('td')
         return list(map(lambda td: td.value, tds))
 
 
 def get_success_panel_text():
+    wait_for_element_by_id("success-panel", timeout=10, retry=0.25)
     return browser.driver.find_element_by_id("success-panel").text
 
 
@@ -94,7 +98,9 @@ def select_wrong_file_type(test_file):
 
 
 def add_eq_ci():
+    wait_for_element_by_name('checkbox-answer', timeout=2, retry=1)
     browser.find_by_name('checkbox-answer').first.check()
+    wait_for_element_by_id('btn-add-ci', timeout=2)
     browser.find_by_id('btn-add-ci').click()
 
 
@@ -192,7 +198,10 @@ def click_edit_collection_exercise_user_description_button():
 
 
 def remove_ci():
+    entry_url = browser.url
+    wait_for_element_by_id('unlink-ci-1', timeout=10, retry=0.25)
     browser.click_link_by_id('unlink-ci-1')
+    wait_for_url_changed(entry_url, timeout=10, retry=0.25, post_change_delay=1)
 
 
 def get_collection_instrument_removed_success_text():
