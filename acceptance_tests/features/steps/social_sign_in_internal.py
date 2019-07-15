@@ -94,4 +94,5 @@ def sign_in_username_and_password_required(_):
 
 @then('the user is notified that an authentication error has occurred (social)')
 def authentication_error_occurred(_):
-    assert social_sign_in_internal.check_authentication_error_message()
+    error_message = social_sign_in_internal.check_authentication_error_message()
+    assert error_message.text == 'Please try again'
