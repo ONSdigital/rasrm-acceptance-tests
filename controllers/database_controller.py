@@ -42,7 +42,6 @@ def select_iac():
 
 
 def get_iac_for_collection_exercise(collection_exercise_id, social=False):
-
     if social:
         sample_unit_type = "H"
     else:
@@ -86,7 +85,9 @@ def get_all_iacs_for_collection_exercise(collection_exercise_id, social=False):
 
 
 def poll_collection_exercise_until_state_changed(collection_exercise_id, state):
+    logger.info("Polling collection excercise until state changed", collection_exercise_id=collection_exercise_id, state=state)
     for _ in range(60):
+        logger.info("Polling", collection_exercise_id=collection_exercise_id, state=state)
         sql = f"SELECT 1 FROM collectionexercise.collectionexercise" \
               f" WHERE id='{collection_exercise_id}' AND statefk = '{state}'"
         result = execute_sql(sql_string=sql)
