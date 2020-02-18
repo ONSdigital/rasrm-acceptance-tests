@@ -64,9 +64,9 @@ spec:
             - name: COLLECTION_INSTRUMENT_SERVICE_PORT
               value: "$(COLLECTION_INSTRUMENT_SERVICE_PORT)"
             - name: AUTH_SERVICE_HOST
-              value: "$(AUTH_SERVICE_SERVICE_HOST)"
+              value: "$(AUTH_SERVICE_HOST)"
             - name: AUTH_SERVICE_PORT
-              value: "$(AUTH_SERVICE_SERVICE_PORT)"
+              value: "$(AUTH_SERVICE_PORT)"
             - name: FRONTSTAGE_SERVICE_HOST
               value: "$(FRONTSTAGE_SERVICE_HOST)"
             - name: FRONTSTAGE_SERVICE_PORT
@@ -122,5 +122,5 @@ spec:
           command: ["/bin/bash", "-c"]
           args: ["make acceptance_tests"]
       restartPolicy: Never
-  backoffLimit: 0
+  backoffLimit: 1
 
