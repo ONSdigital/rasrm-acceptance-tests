@@ -1,0 +1,7 @@
+env: sandbox
+namespace: test
+serviceID: action
+
+image:
+  name: eu.gcr.io/ons-rasrmbs-management
+  pullPolicy: Always

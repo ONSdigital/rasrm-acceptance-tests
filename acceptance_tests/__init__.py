@@ -23,10 +23,12 @@ def create_browser():
     driver_type = os.getenv('WEBDRIVER', 'chrome').lower()
     headless = os.getenv('HEADLESS', 'True') == 'True'
 
-    if driver_type == 'chrome' and headless:
+    if driver_type == 'chrome':
         chromedriver_binary.add_chromedriver_to_path()
+        os.chmod(chromedriver_binary.chromedriver_filename, 0o755)
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
         return Browser(driver_type, headless=headless, options=chrome_options)
 
     return Browser(driver_type, headless=headless)
