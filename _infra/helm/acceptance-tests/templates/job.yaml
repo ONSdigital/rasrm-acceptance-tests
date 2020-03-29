@@ -42,6 +42,17 @@ spec:
                   key: password
             - name: DATABASE_URI
               value: "postgres://$(DB_USERNAME):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)"
+            {{- if .Values.selenium.grid.enabled }}
+            - name: BROWSER
+              value: {{ .Values.selenium.grid.browser }}
+            - name: GRID_URL
+              value: http://selenium-selenium-hub.{{ .Values.selenium.grid.namespace }}.svc.cluster.local
+            - name: WEBDRIVER
+              value: remote
+            {{- else }}
+            - name: WEBDRIVER
+              value: {{ .Values.selenium.webdriver }}
+            {{- end }}
             - name: SFTP_PORT
               value: "$(SFTP_SERVICE_PORT)"
             - name: SFTP_HOST

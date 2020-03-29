@@ -31,6 +31,16 @@ def create_browser():
         chrome_options.add_argument("--disable-dev-shm-usage")
         return Browser(driver_type, headless=headless, options=chrome_options)
 
+    if driver_type == 'remote':
+        browser = os.getenv('BROWSER', 'chrome').lower()
+        grid = os.getenv('GRID_URL', 'http://localhost:4444')
+        return Browser(
+            driver_name=driver_type
+            browser=browser
+            command_executor=grid
+            keep_alive=True
+        )
+
     return Browser(driver_type, headless=headless)
 
 
