@@ -35,9 +35,9 @@ def create_browser():
         browser = os.getenv('BROWSER', 'chrome').lower()
         grid = os.getenv('GRID_URL', 'http://localhost:4444')
         return Browser(
-            driver_name=driver_type
-            browser=browser
-            command_executor=grid
+            driver_name=driver_type,
+            browser=browser,
+            command_executor=grid,
             keep_alive=True
         )
 
