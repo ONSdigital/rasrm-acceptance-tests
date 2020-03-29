@@ -46,7 +46,7 @@ spec:
             - name: BROWSER
               value: {{ .Values.selenium.grid.browser }}
             - name: GRID_URL
-              value: http://selenium-selenium-hub.{{ .Values.selenium.grid.namespace }}.svc.cluster.local
+              value: http://selenium-selenium-hub.{{ .Values.selenium.grid.namespace }}.svc.cluster.local:4444/wd/hub
             - name: WEBDRIVER
               value: remote
             {{- else }}
