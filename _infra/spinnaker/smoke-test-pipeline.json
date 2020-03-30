@@ -1,5 +1,7 @@
 {
   "appConfig": {},
+  "application": "acceptance-tests",
+  "name": "Smoke test",
   "expectedArtifacts": [
     {
       "defaultArtifact": {
@@ -121,7 +123,7 @@
           "value": "foxj"
         },
         {
-          "value": "sinnah"
+          "value": "sinhaa"
         },
         {
           "value": "baileyw"
