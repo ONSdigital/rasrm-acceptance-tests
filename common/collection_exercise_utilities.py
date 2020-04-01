@@ -38,7 +38,7 @@ def execute_collection_exercises():
     logger.info('Collection exercises have finished executing')
 
 
-def execute_collection_exercise(survey_id, period, ci_type='SEFT'):
+def execute_collection_exercise(survey_id, period, ci_type='SEFT', performance_test=False):
     logger.info('Executing collection exercise', survey_id=survey_id, period=period, ci_type=ci_type)
     collection_exercise = collection_exercise_controller.get_collection_exercise(survey_id, period)
 
@@ -51,8 +51,8 @@ def execute_collection_exercise(survey_id, period, ci_type='SEFT'):
                                           'resources/collection_instrument_files/064_201803_0001.xlsx',
                                           form_type='0001')
 
-    sample_summary = sample_controller.upload_sample(collection_exercise['id'],
-                                                     'resources/sample_files/business-survey-sample-date.csv')
+    sample_filename = 'performance-test-sample.csv' if performance_test else 'resources/sample_files/business-survey-sample-date.csv'
+    sample_summary = sample_controller.upload_sample(collection_exercise['id'], sample_filename)
     collection_exercise_controller.link_sample_summary_to_collection_exercise(collection_exercise['id'],
                                                                               sample_summary['id'])
     poll_collection_exercise_until_state_changed(collection_exercise['id'], 'READY_FOR_REVIEW')
@@ -60,7 +60,7 @@ def execute_collection_exercise(survey_id, period, ci_type='SEFT'):
     logger.info('Successfully executed collection exercise', survey_id=survey_id, period=period, ci_type=ci_type)
 
 
-def poll_database_for_iac(survey_id, period, social=False):
+def poll_database_for_iac(survey_id, period, social=False, count=1):
     logger.info('Waiting for collection exercise execution process to finish',
                 survey_id=survey_id, period=period)
     collection_exercise_id = collection_exercise_controller.get_collection_exercise(survey_id, period)['id']
@@ -70,7 +70,7 @@ def poll_database_for_iac(survey_id, period, social=False):
                     collection_exercise_id=collection_exercise_id,
                     social=social,
                     attempt=attempt)
-        iac_code = database_controller.get_iac_for_collection_exercise(collection_exercise_id, social=social)
+        iac_code = database_controller.get_iac_for_collection_exercise(collection_exercise_id, social=social, count=count)
         if iac_code:
             logger.info('Collection exercise finished executing', survey_id=survey_id, period=period)
             return iac_code
