@@ -52,6 +52,10 @@ spec:
               value: "demo"
             - name: SFTP_DIR
               value: "/sftp/files"
+            - name: FRONTSTAGE_SERVICE_HOST
+              value: "frontstage.{{ .Values.namespace }}.svc.cluster.local"
+            - name: RESPONSE_OPERATIONS_UI_SERVICE_HOST
+              value: "response-operations-ui.{{ .Values.namespace }}.svc.cluster.local"
             - name: UAA_SERVICE_URL
               value: "http://$(UAA_SERVICE_HOST)"
             - name: UAA_PORT
