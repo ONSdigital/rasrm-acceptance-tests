@@ -1,5 +1,5 @@
 env: sandbox
-namespace: test
+namespace: dev
 serviceID: action
 
 image:
