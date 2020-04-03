@@ -1,6 +1,7 @@
 env: sandbox
 namespace: dev
 serviceID: action
+webdriver: firefox
 
 image:
   name: eu.gcr.io/ons-rasrmbs-management

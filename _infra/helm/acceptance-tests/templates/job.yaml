@@ -62,6 +62,8 @@ spec:
               value: "$(UAA_SERVICE_PORT)"
             - name: IGNORE_SEQUENTIAL_DATA_SETUP
               value: "False"
+            - name: WEBDRIVER
+              value: "{{ .Values.webdriver }}"
           command: ["/bin/bash", "-c"]
           args: ["make acceptance_tests"]
       restartPolicy: Never
