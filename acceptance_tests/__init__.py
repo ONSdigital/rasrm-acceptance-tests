@@ -32,13 +32,6 @@ def create_browser():
         chrome_options.add_argument("--disable-dev-shm-usage")
         return Browser(driver_type, headless=headless, options=chrome_options)
 
-    # if driver_type == 'firefox':
-    #     firefox_options = webdriver.FirefoxOptions()
-    #     binary_path = firefox_options.binary_location
-    #     binary = FirefoxBinary(binary_path)
-    #     driver = webdriver.Firefox(firefox_binary=binary)
-    #     return Browser(driver_type, headless=headless, options=firefox_options)
-
     return Browser(driver_type, headless=headless)
 
 
