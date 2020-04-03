@@ -4,6 +4,7 @@ import os
 from retrying import retry
 from selenium import webdriver
 import chromedriver_binary
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from splinter import Browser
 from structlog import configure
 from structlog.stdlib import LoggerFactory
@@ -30,6 +31,13 @@ def create_browser():
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
         return Browser(driver_type, headless=headless, options=chrome_options)
+
+    if driver_type == 'firefox':
+        firefox_options = webdriver.FirefoxOptions()
+        binary_path = firefox_options.binary_location
+        binary = FirefoxBinary(binary_path)
+        driver = webdriver.Firefox(firefox_binary=binary)
+        return Browser(driver_type, headless=headless, options=firefox_options)
 
     return Browser(driver_type, headless=headless)
 
