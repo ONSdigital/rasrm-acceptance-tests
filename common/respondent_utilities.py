@@ -70,7 +70,7 @@ def create_respondent_user_login_account(user_name):
 
 
 def register_respondent(survey_id, period, username, ru_ref=None, verified=True):
-    logger.debug('Registering respondent', survey_id=survey_id, period=period, ru_ref=ru_ref)
+    logger.info('Registering respondent', survey_id=survey_id, period=period, ru_ref=ru_ref)
     collection_exercise_id = collection_exercise_controller.get_collection_exercise(survey_id, period)['id']
     if ru_ref:
         business_party = party_controller.get_party_by_ru_ref(ru_ref)

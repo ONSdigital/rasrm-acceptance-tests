@@ -36,18 +36,23 @@ def post_case_event(case_id, category, description):
 
 
 def get_b_case(collection_exercise_id, business_id):
-    logger.debug('Retrieving B case',
+    logger.info('Retrieving B case',
                  business_id=business_id, collection_exercise_id=collection_exercise_id)
 
+    print("Retriving B case")
+    print(collection_exercise_id)
+
     casegroups = get_casegroups_by_party_id(business_id)
+    print(casegroups)
     casegroup = next(casegroup
                      for casegroup in casegroups
                      if collection_exercise_id == casegroup['collectionExerciseId'])
+    print(casegroup)
     cases = get_cases_by_casegroup(casegroup['id'])
     b_case = next(case
                   for case in cases
                   if case['sampleUnitType'] == 'B')
-    logger.debug('Successfully retrieved B case',
+    logger.info('Successfully retrieved B case',
                  collection_exercise_id=collection_exercise_id, business_id=business_id)
 
     iac = get_case_iac(b_case['id'])

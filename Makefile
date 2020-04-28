@@ -38,9 +38,17 @@ system_tests: run_tests
 # Run setup for performance testing
 # Note that IAC provisioning is limited by Case service's case-distribution.retrieval-max setting, running this number every 30 seconds.
 # If 100/minute is too slow for you, consider changing this
-performance: setup
+performance:
 	pipenv run python sample_file_generator.py -n ${RESPONDENTS}
 	pipenv run python seed_performance_environment.py -n ${RESPONDENTS}
+
+portforward:
+	kubectl port-forward $(shell kubectl get pods --selector=app=collection-exercise -o jsonpath='{.items[0].metadata.name}') 8145:8080 & echo "$$!" > "./kubectl.pid"
+	kubectl port-forward $(shell kubectl get pods --selector=app=collection-instrument -o jsonpath='{.items[0].metadata.name}') 8002:8080 & echo "$$!" >> "./kubectl.pid"
+	kubectl port-forward $(shell kubectl get pods --selector=app=sample -o jsonpath='{.items[0].metadata.name}') 8125:8080 & echo "$$!" >> "./kubectl.pid"
+	kubectl port-forward $(shell kubectl get pods --selector=app=party -o jsonpath='{.items[0].metadata.name}') 8081:8080 & echo "$$!" >> "./kubectl.pid"
+	kubectl port-forward $(shell kubectl get pods --selector=app=case -o jsonpath='{.items[0].metadata.name}') 8171:8080 & echo "$$!" >> "./kubectl.pid"
+	kubectl port-forward $(shell kubectl get pods --selector=app=iac -o jsonpath='{.items[0].metadata.name}') 8121:8080 & echo "$$!" >> "./kubectl.pid"
 
 # Run sequentially & in parallel targets
 acceptance_tests: acceptance_sequential_tests acceptance_parallel_tests
